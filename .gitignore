@@ -1,0 +1,43 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# === Virtual environment ===
+venv/
+env/
+.venv/
+ENV/
+Pipfile
+Pipfile.lock
+
+# === IDE / Editors ===
+.idea/
+.vscode/
+*.iml
+
+# === OS files ===
+.DS_Store
+Thumbs.db
+
+# === Logs ===
+*.log
+logs/
+
+# === Environment / Secrets ===
+.env
+*.env
+.env.*
+
+# === Builds / Caches ===
+dist/
+build/
+*.egg-info/
+.cache/
+.pytest_cache/
+
+# === Docs (редагуєш безпосередньо на GitHub) ===
+README.md
+LICENSE
