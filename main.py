@@ -229,7 +229,7 @@ async def _auto_disconnect_timer(gp: GuildPlayer, vc: discord.VoiceClient):
         return
     channel = vc.channel
     human_members = [m for m in channel.members if not m.bot]
-    if len(human_members) == 0:
+    if not human_members:
         if gp.text_channel:
             await gp.text_channel.send("👋 Нікого немає в каналі вже 5 хвилин — від'єднуюсь.")
         await vc.disconnect(force=True)
@@ -269,7 +269,7 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
     gp = get_player(guild)
     bot_channel = vc.channel
     human_members = [m for m in bot_channel.members if not m.bot]
-    if len(human_members) == 0:
+    if not human_members:
         # Запускаємо таймер відключення
         if gp.disconnect_task and not gp.disconnect_task.done():
             gp.disconnect_task.cancel()
@@ -321,7 +321,13 @@ async def play(interaction: discord.Interaction, query: str):
         russian_tracks = [t for t in tracks if is_russian_track(t)]
 
         await gp.add(tracks)
-        added = f"Додав **{len(tracks)}** треків." if len(tracks) > 1 else f"Додав: **{tracks[0].title}**"
+        count = len(tracks)
+        if count == 1:
+            added = f"Додав: **{tracks[0].title}**"
+        elif 2 <= count <= 4:
+            added = f"Додав **{count}** треки."
+        else:
+            added = f"Додав **{count}** треків."
         await interaction.followup.send(added)
 
         if russian_tracks:
