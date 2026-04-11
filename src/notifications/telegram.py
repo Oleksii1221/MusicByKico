@@ -29,7 +29,7 @@ class TelegramNotifier:
 
         try:
             async with aiohttp.ClientSession() as session:
-                async with session.post(url, json=payload, timeout=10) as response:
+                async with session.post(url, json=payload, timeout=aiohttp.ClientTimeout(total=10)) as response:
                     if response.status >= 400:
                         body = await response.text()
                         logger.warning("Telegram notify failed: %s | %s", response.status, body)

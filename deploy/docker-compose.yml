@@ -5,6 +5,8 @@ services:
     restart: unless-stopped
     volumes:
       - ./docker/lavalink/application.yml:/opt/Lavalink/application.yml
+    env_file:
+      - ../.env
     ports:
       - "2333:2333"
 

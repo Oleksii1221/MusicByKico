@@ -3,7 +3,7 @@ server:
 
 lavalink:
   server:
-    password: "KicoSuperMusicPass2026"
+    password: "${LAVALINK_PASSWORD:-change_me_please}"
     sources:
       youtube: false
       soundcloud: true

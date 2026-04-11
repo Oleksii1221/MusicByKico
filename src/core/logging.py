@@ -5,7 +5,6 @@ import logging
 from src.core.config import get_settings
 
 
-
 def configure_logging() -> None:
     settings = get_settings()
     logging.basicConfig(
