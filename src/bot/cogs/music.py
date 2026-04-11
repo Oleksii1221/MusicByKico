@@ -48,7 +48,7 @@ class MusicCog(commands.Cog):
             return voice
         return None
 
-    @app_commands.command(name="play", description="одає трек або плейлист у чергу")
+    @app_commands.command(name="play", description="Додає трек або плейлист у чергу")
     @app_commands.describe(query="YouTube / YouTube Music URL або пошуковий запит")
     async def play(self, interaction: discord.Interaction, query: str) -> None:
         await interaction.response.defer(thinking=True)
@@ -66,114 +66,114 @@ class MusicCog(commands.Cog):
             started = await self.music.ensure_playing(player)
 
             if is_playlist:
-                suffix = " і запуск почався" if started else ""
+                suffix = " і відтворення почалося" if started else ""
                 await interaction.followup.send(
-                    f"📚 одано плейлист **{title}**. Треків: **{added_count}**{suffix}"
+                    f"📚 Додано плейлист **{title}**. Треків: **{added_count}**{suffix}"
                 )
             else:
-                suffix = " і запуск почався" if started else ""
+                suffix = " і відтворення почалося" if started else ""
                 await interaction.followup.send(
-                    f"➕ одано в чергу: **{title}**{suffix}"
+                    f"➕ Додано в чергу: **{title}**{suffix}"
                 )
 
         except Exception as exc:
             logger.exception("/play failed")
             await interaction.followup.send(
-                f"❌ е вдалося виконати /play: {exc}",
+                f"❌ Не вдалося виконати /play: {exc}",
                 ephemeral=True,
             )
 
-    @app_commands.command(name="skip", description="ропускає поточний трек")
+    @app_commands.command(name="skip", description="Пропускає поточний трек")
     async def skip(self, interaction: discord.Interaction) -> None:
         player = self._get_player(interaction)
         if player is None:
-            await self._safe_reply(interaction, "ема активного плеєра.", ephemeral=True)
+            await self._safe_reply(interaction, "Немає активного плеєра.", ephemeral=True)
             return
 
         ok = await self.music.skip(player)
         if not ok:
-            await self._safe_reply(interaction, "араз нічого не грає.", ephemeral=True)
+            await self._safe_reply(interaction, "Зараз нічого не грає.", ephemeral=True)
             return
 
         await self._safe_reply(interaction, "⏭️ Трек пропущено.")
 
-    @app_commands.command(name="pause", description="Ставит трек на паузу")
+    @app_commands.command(name="pause", description="Ставить трек на паузу")
     async def pause(self, interaction: discord.Interaction) -> None:
         player = self._get_player(interaction)
         if player is None or player.current is None:
-            await self._safe_reply(interaction, "ема що ставити на паузу.", ephemeral=True)
+            await self._safe_reply(interaction, "Немає що ставити на паузу.", ephemeral=True)
             return
 
         await player.pause(True)
-        await self._safe_reply(interaction, "⏸️ ауза.")
+        await self._safe_reply(interaction, "⏸️ Пауза.")
 
-    @app_commands.command(name="resume", description="родовжує відтворення")
+    @app_commands.command(name="resume", description="Продовжує відтворення")
     async def resume(self, interaction: discord.Interaction) -> None:
         player = self._get_player(interaction)
         if player is None:
-            await self._safe_reply(interaction, "ема активного плеєра.", ephemeral=True)
+            await self._safe_reply(interaction, "Немає активного плеєра.", ephemeral=True)
             return
 
         await player.resume()
-        await self._safe_reply(interaction, "▶️ родовжено.")
+        await self._safe_reply(interaction, "▶️ Відтворення продовжено.")
 
-    @app_commands.command(name="stop", description="упиняє музику і очищає чергу")
+    @app_commands.command(name="stop", description="Зупиняє музику і очищає чергу")
     async def stop(self, interaction: discord.Interaction) -> None:
         player = self._get_player(interaction)
         if player is None:
-            await self._safe_reply(interaction, "ема активного плеєра.", ephemeral=True)
+            await self._safe_reply(interaction, "Немає активного плеєра.", ephemeral=True)
             return
 
         await self.music.stop_and_clear(player)
-        await self._safe_reply(interaction, "⏹️ упинено. ерга очищена.")
+        await self._safe_reply(interaction, "⏹️ Зупинено. Черга очищена.")
 
-    @app_commands.command(name="disconnect", description="ихід із голосового каналу")
+    @app_commands.command(name="disconnect", description="Вихід із голосового каналу")
     async def disconnect(self, interaction: discord.Interaction) -> None:
         player = self._get_player(interaction)
         if player is None:
             await self._safe_reply(
                 interaction,
-                " не підключений до voice channel.",
+                "Бот не підключений до голосового каналу.",
                 ephemeral=True,
             )
             return
 
         await self.music.disconnect(player)
-        await self._safe_reply(interaction, "👋 ідключився від voice channel.")
+        await self._safe_reply(interaction, "👋 Відключився від голосового каналу.")
 
-    @app_commands.command(name="queue", description="оказує поточну чергу")
+    @app_commands.command(name="queue", description="Показує поточну чергу")
     async def queue(self, interaction: discord.Interaction) -> None:
         player = self._get_player(interaction)
         if player is None:
-            await self._safe_reply(interaction, "ема активного плеєра.", ephemeral=True)
+            await self._safe_reply(interaction, "Немає активного плеєра.", ephemeral=True)
             return
 
         current = player.current
         current_line = (
-            f"**араз:** {current.title} — {current.author}\n\n"
+            f"**Зараз:** {current.title} — {current.author}\n\n"
             if current is not None
             else ""
         )
         preview = self.music.queue_preview(player)
         await self._safe_reply(interaction, f"📜 {current_line}{preview}")
 
-    @app_commands.command(name="nowplaying", description="оказує поточний трек")
+    @app_commands.command(name="nowplaying", description="Показує поточний трек")
     async def nowplaying(self, interaction: discord.Interaction) -> None:
         player = self._get_player(interaction)
         if player is None or player.current is None:
-            await self._safe_reply(interaction, "араз нічого не грає.", ephemeral=True)
+            await self._safe_reply(interaction, "Зараз нічого не грає.", ephemeral=True)
             return
 
         track = player.current
         await self._safe_reply(
             interaction,
             f"🎶 **{track.title}**\n"
-            f"втор: **{track.author}**\n"
-            f"URL: {getattr(track, 'uri', None) or 'ема'}",
+            f"Автор: **{track.author}**\n"
+            f"URL: {getattr(track, 'uri', None) or 'Немає'}",
         )
 
-    @app_commands.command(name="volume", description="мінює гучність")
-    @app_commands.describe(value="ід 1 до 1000")
+    @app_commands.command(name="volume", description="Змінює гучність")
+    @app_commands.describe(value="Від 1 до 1000")
     async def volume(
         self,
         interaction: discord.Interaction,
@@ -181,19 +181,19 @@ class MusicCog(commands.Cog):
     ) -> None:
         player = self._get_player(interaction)
         if player is None:
-            await self._safe_reply(interaction, "ема активного плеєра.", ephemeral=True)
+            await self._safe_reply(interaction, "Немає активного плеєра.", ephemeral=True)
             return
 
         player.default_volume = value
         await player.set_volume(value)
-        await self._safe_reply(interaction, f"🔊 учність встановлено на **{value}**.")
+        await self._safe_reply(interaction, f"🔊 Гучність встановлено на **{value}**.")
 
-    @app_commands.command(name="autoplay", description="микає або вимикає autoplay")
+    @app_commands.command(name="autoplay", description="Вмикає або вимикає autoplay")
     @app_commands.describe(enabled="true = увімкнути, false = вимкнути")
     async def autoplay(self, interaction: discord.Interaction, enabled: bool) -> None:
         player = self._get_player(interaction)
         if player is None:
-            await self._safe_reply(interaction, "ема активного плеєра.", ephemeral=True)
+            await self._safe_reply(interaction, "Немає активного плеєра.", ephemeral=True)
             return
 
         player.autoplay_enabled = enabled
@@ -202,15 +202,15 @@ class MusicCog(commands.Cog):
             f"♾️ Autoplay {'увімкнено' if enabled else 'вимкнено'}.",
         )
 
-    @app_commands.command(name="clear", description="чищає чергу")
+    @app_commands.command(name="clear", description="Очищає чергу")
     async def clear(self, interaction: discord.Interaction) -> None:
         player = self._get_player(interaction)
         if player is None:
-            await self._safe_reply(interaction, "ема активного плеєра.", ephemeral=True)
+            await self._safe_reply(interaction, "Немає активного плеєра.", ephemeral=True)
             return
 
         player.queue.clear()
-        await self._safe_reply(interaction, "🧹 ергу очищено.")
+        await self._safe_reply(interaction, "🧹 Чергу очищено.")
 
 
 async def setup(bot: MusicBot) -> None:
