@@ -35,6 +35,8 @@ intents.message_content = True
 intents.voice_states = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+RUSSIAN_LANGUAGE_CODES = {"ru", "rus"}
+
 @dataclass
 class Track:
     url: str             # оригінальний URL або пошуковий запит
@@ -44,6 +46,14 @@ class Track:
     duration: Optional[int] = None
     uploader: Optional[str] = None
     id: Optional[str] = None
+    language: Optional[str] = None  # мова треку (наприклад "ru", "uk", "en")
+
+
+def is_russian_track(track: Track) -> bool:
+    """Повертає True, якщо трек визначено як російськомовний контент."""
+    if track.language and track.language.lower() in RUSSIAN_LANGUAGE_CODES:
+        return True
+    return False
 
 class YTDLP:
     def __init__(self):
@@ -70,6 +80,7 @@ class YTDLP:
             duration=info.get("duration"),
             uploader=info.get("uploader"),
             id=info.get("id"),
+            language=info.get("language"),
         )
 
     def expand_input(self, query_or_url: str) -> List[Track]:
@@ -99,11 +110,13 @@ class YTDLP:
 
         return tracks
 
-    def get_related(self, video_webpage_url: str) -> Optional[Track]:
+    def get_related(self, video_webpage_url: str, skip_russian: bool = False) -> Optional[Track]:
         """
         Спроба дістати пов’язані (recommended) відео зі сторінки.
         Якщо yt-dlp не поверне related, робимо пошук за назвою.
+        Якщо skip_russian=True, пропускає треки російською мовою (для автопродовження).
         """
+        info = None
         try:
             info = self.extract(video_webpage_url)
             # yt-dlp часто кладе рекомендовані сюди:
@@ -115,17 +128,25 @@ class YTDLP:
                 candidate = f"https://www.youtube.com/watch?v={vid}" if len(vid) == 11 else vid
                 tr = self.expand_input(candidate)
                 if tr:
+                    if skip_russian and is_russian_track(tr[0]):
+                        continue
                     return tr[0]
         except Exception:
             pass
 
         # Фолбек: пошук за назвою + uploader
-        title = info.get("title") if "info" in locals() else None
-        uploader = info.get("uploader") if "info" in locals() else None
+        title = info.get("title") if info else None
+        uploader = info.get("uploader") if info else None
         if title:
             q = f"ytsearch1:{title} {uploader or ''}"
-            tr = self.expand_input(q)
-            return tr[0] if tr else None
+            try:
+                tr = self.expand_input(q)
+                if tr:
+                    if skip_russian and is_russian_track(tr[0]):
+                        return None
+                    return tr[0]
+            except Exception:
+                pass
 
         return None
 
@@ -139,6 +160,8 @@ class GuildPlayer:
         self.lock = asyncio.Lock()
         self.audio_task: Optional[asyncio.Task] = None
         self.yt = YTDLP()
+        self.disconnect_task: Optional[asyncio.Task] = None
+        self.text_channel: Optional[discord.TextChannel] = None
 
     async def ensure_voice(self, interaction: discord.Interaction):
         if not interaction.user.voice or not interaction.user.voice.channel:
@@ -165,12 +188,13 @@ class GuildPlayer:
         vc.play(source, after=after_play)
 
     async def player_loop(self, vc: discord.VoiceClient, channel: discord.TextChannel):
+        self.text_channel = channel
         while True:
             self.next_event.clear()
             # поточний трек: з черги або з autoplay
             if self.queue.empty() and self.autoplay and self.current:
-                # беремо рекомендацію
-                rel = self.yt.get_related(self.current.webpage_url)
+                # беремо рекомендацію, пропускаємо російськомовні треки
+                rel = self.yt.get_related(self.current.webpage_url, skip_russian=True)
                 if rel:
                     await self.queue.put(rel)
 
@@ -185,6 +209,7 @@ class GuildPlayer:
                 break
 
     async def start_if_needed(self, vc: discord.VoiceClient, channel: discord.TextChannel):
+        self.text_channel = channel
         if self.audio_task and not self.audio_task.done():
             return
         self.audio_task = asyncio.create_task(self.player_loop(vc, channel))
@@ -195,6 +220,22 @@ def get_player(guild: discord.Guild) -> GuildPlayer:
     if guild.id not in players:
         players[guild.id] = GuildPlayer(guild)
     return players[guild.id]
+
+
+async def _auto_disconnect_timer(gp: GuildPlayer, vc: discord.VoiceClient):
+    """Від'єднує бота після 5 хвилин порожнього голосового каналу."""
+    await asyncio.sleep(300)
+    if not vc.is_connected():
+        return
+    channel = vc.channel
+    human_members = [m for m in channel.members if not m.bot]
+    if len(human_members) == 0:
+        if gp.text_channel:
+            await gp.text_channel.send("👋 Нікого немає в каналі вже 5 хвилин — від'єднуюсь.")
+        await vc.disconnect(force=True)
+        if gp.audio_task and not gp.audio_task.done():
+            gp.audio_task.cancel()
+
 
 # --------- SLASH КОМАНДИ ---------
 
@@ -218,6 +259,28 @@ async def on_ready():
         await bot.change_presence(activity=next(statuses))
         await asyncio.sleep(10)  # міняє кожні 10 секунд
 
+@bot.event
+async def on_voice_state_update(member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
+    """Автовідключення, якщо голосовий канал порожній протягом 5 хвилин."""
+    guild = member.guild
+    vc = guild.voice_client
+    if not vc or member.bot:
+        return
+    gp = get_player(guild)
+    bot_channel = vc.channel
+    human_members = [m for m in bot_channel.members if not m.bot]
+    if len(human_members) == 0:
+        # Запускаємо таймер відключення
+        if gp.disconnect_task and not gp.disconnect_task.done():
+            gp.disconnect_task.cancel()
+        gp.disconnect_task = asyncio.create_task(_auto_disconnect_timer(gp, vc))
+    else:
+        # Хтось є в каналі — скасовуємо таймер
+        if gp.disconnect_task and not gp.disconnect_task.done():
+            gp.disconnect_task.cancel()
+            gp.disconnect_task = None
+
+
 @bot.tree.command(name="join", description="Приєднатись у ваш голосовий канал")
 async def join(interaction: discord.Interaction):
     gp = get_player(interaction.guild)
@@ -230,6 +293,10 @@ async def join(interaction: discord.Interaction):
 @bot.tree.command(name="leave", description="Вийти з голосового каналу")
 async def leave(interaction: discord.Interaction):
     vc = interaction.guild.voice_client
+    gp = get_player(interaction.guild)
+    if gp.disconnect_task and not gp.disconnect_task.done():
+        gp.disconnect_task.cancel()
+        gp.disconnect_task = None
     if vc:
         await vc.disconnect(force=True)
     await interaction.response.send_message("👋 Вийшов.", ephemeral=True)
@@ -251,9 +318,16 @@ async def play(interaction: discord.Interaction, query: str):
             await interaction.followup.send("Не знайшов нічого за запитом.")
             return
 
+        russian_tracks = [t for t in tracks if is_russian_track(t)]
+
         await gp.add(tracks)
-        added = f"Додав **{len(tracks)}** трек(и)." if len(tracks) > 1 else f"Додав: **{tracks[0].title}**"
+        added = f"Додав **{len(tracks)}** треків." if len(tracks) > 1 else f"Додав: **{tracks[0].title}**"
         await interaction.followup.send(added)
+
+        if russian_tracks:
+            await interaction.channel.send(
+                "Фу, як ти це слухаєш?\nпіду вуха з хлоркою помию 🤢"
+            )
 
         await gp.start_if_needed(vc, interaction.channel)
     except Exception as e:
@@ -328,10 +402,11 @@ async def autoplay(interaction: discord.Interaction, mode: str):
     gp = get_player(interaction.guild)
     mode = mode.lower()
     if mode not in ("on", "off"):
-        await interaction.response.send_message("Вкажіть: on або off.", ephemeral=True)
+        await interaction.response.send_message("Вкажіть: `on` або `off`.", ephemeral=True)
         return
     gp.autoplay = (mode == "on")
-    await interaction.response.send_message(f"🔁 Autoplay: **{mode}**", ephemeral=True)
+    status = "увімкнено ✅" if gp.autoplay else "вимкнено ❌"
+    await interaction.response.send_message(f"🔁 Автопродовження: **{status}**", ephemeral=True)
 
 @bot.tree.command(name="now", description="Що зараз грає")
 async def now(interaction: discord.Interaction):
@@ -340,6 +415,32 @@ async def now(interaction: discord.Interaction):
         await interaction.response.send_message(f"🎧 **{gp.current.title}**\n{gp.current.webpage_url}", ephemeral=True)
     else:
         await interaction.response.send_message("Зараз нічого не грає.", ephemeral=True)
+
+@bot.tree.command(name="help", description="Список усіх команд бота")
+async def help_cmd(interaction: discord.Interaction):
+    embed = discord.Embed(
+        title="🎵 MusicByKico — Список команд",
+        description="Усі доступні команди музичного бота:",
+        color=0x1DB954,
+    )
+    commands_list = [
+        ("/join", "Приєднатись до вашого голосового каналу"),
+        ("/leave", "Вийти з голосового каналу"),
+        ("/play <url або запит>", "Відтворити трек/плейлист або знайти на YouTube"),
+        ("/queue", "Показати поточну чергу треків"),
+        ("/skip", "Пропустити поточний трек"),
+        ("/pause", "Поставити відтворення на паузу"),
+        ("/resume", "Продовжити відтворення"),
+        ("/stop", "Зупинити відтворення та очистити чергу"),
+        ("/now", "Показати поточний трек"),
+        ("/autoplay on/off", "Увімкнути або вимкнути автопродовження (рекомендації YouTube). Російськомовні треки пропускаються автоматично."),
+        ("/help", "Показати цей список команд"),
+    ]
+    for cmd, desc in commands_list:
+        embed.add_field(name=cmd, value=desc, inline=False)
+    embed.set_footer(text="Слухай музику з радістю! 🎧")
+    await interaction.response.send_message(embed=embed, ephemeral=True)
+
 
 if __name__ == "__main__":
     token = os.getenv("DISCORD_TOKEN")

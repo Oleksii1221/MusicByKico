@@ -8,9 +8,12 @@
 
 - 🎧 Plays **YouTube videos** and **playlists**
 - 🔁 **Autoplay** — continues playback with YouTube’s recommended songs  
+- �� **Russian content filter** — automatically skips Russian-language tracks in autoplay; warns when added manually  
+- ⏳ **Auto-disconnect** — leaves the voice channel after 5 minutes of inactivity  
 - 🧠 **Smart queue management** (skip, pause, resume, clear)
 - 🔊 **Real-time playback control** via Discord Slash Commands  
 - 🎶 Works with **text search or YouTube links**
+- 📋 **Built-in `/help` command** — lists all available commands in Discord  
 - 🪄 Simple setup, lightweight, and easy to host on any server
 - 💡 **Fully asynchronous** and optimized for low latency streaming
 
@@ -51,7 +54,7 @@ pip install -U discord.py yt-dlp pynacl python-dotenv
    Запуск через Python:
 
    ```bash
-   python bot.py
+   python main.py
    ```
 
 4. **Invite bot to your server**  
@@ -71,13 +74,14 @@ pip install -U discord.py yt-dlp pynacl python-dotenv
 | `/join` | Connects bot to your current voice channel | Підключає бота до вашого голосового каналу |
 | `/leave` | Disconnects bot | Від’єднує бота |
 | `/play <url or search>` | Plays YouTube video/playlist or searches by name | Відтворює відео/плейлист або шукає трек за назвою |
-| `/pause` | Pauses current track | Ставит поточний трек на паузу |
+| `/pause` | Pauses current track | Ставить поточний трек на паузу |
 | `/resume` | Resumes playback | Продовжує відтворення |
 | `/skip` | Skips current track | Пропускає поточний трек |
 | `/stop` | Stops playback and clears queue | Зупиняє відтворення та очищає чергу |
 | `/queue` | Shows queued songs | Показує чергу треків |
 | `/now` | Shows currently playing song | Показує трек, який зараз грає |
-| `/autoplay on/off` | Enables or disables autoplay (YouTube recommendations) | Вмикає або вимикає автопродовження за рекомендаціями |
+| `/autoplay on/off` | Enables or disables autoplay (YouTube recommendations). Russian tracks are skipped automatically. | Вмикає або вимикає автопродовження за рекомендаціями. Російськомовні треки пропускаються автоматично. |
+| `/help` | Shows the full list of bot commands | Показує повний список команд бота |
 
 ---
 
@@ -89,6 +93,12 @@ When the queue is empty, the bot automatically fetches a **recommended track** f
 If YouTube doesn’t return related videos, the bot falls back to a **title-based search**.  
 Якщо YouTube не повертає пов’язані відео — бот шукає схожий трек за назвою.
 
+**Russian-language tracks are automatically skipped** during autoplay. Users can still add them manually — the bot will react with a warning message.  
+**Російськомовні треки автоматично пропускаються** під час автопродовження. Але користувач може додати їх вручну — бот попередить повідомленням.
+
+**Auto-disconnect:** if no human members are in the voice channel for **5 minutes**, the bot leaves automatically.  
+**Автовідключення:** якщо в голосовому каналі нікого немає протягом **5 хвилин**, бот від’єднується автоматично.
+
 ---
 
 ## 🧩 Folder Structure / Структура проєкту
@@ -96,7 +106,7 @@ If YouTube doesn’t return related videos, the bot falls back to a **title-base
 ```
 MusicByKico/
 │
-├── bot.py              # Main bot logic
+├── main.py             # Main bot logic
 ├── .env                # Discord token
 ├── requirements.txt    # (optional) Dependencies
 └── README.md           # This file
@@ -142,7 +152,7 @@ After=network.target
 Type=simple
 User=your_username
 WorkingDirectory=/path/to/MusicByKico
-ExecStart=/usr/bin/python3 /path/to/MusicByKico/bot.py
+ExecStart=/usr/bin/python3 /path/to/MusicByKico/main.py
 Restart=on-failure
 
 [Install]
