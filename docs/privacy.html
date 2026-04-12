@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — MusicByKico</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f0f0f;
+      color: #e0e0e0;
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 780px; margin: 0 auto; }
+    header { margin-bottom: 2.5rem; border-bottom: 1px solid #2a2a2a; padding-bottom: 1.5rem; }
+    header h1 { font-size: 2rem; color: #ffffff; }
+    header p { color: #888; margin-top: 0.4rem; font-size: 0.9rem; }
+    h2 { font-size: 1.15rem; color: #c084fc; margin-top: 2rem; margin-bottom: 0.6rem; }
+    p, li { font-size: 0.97rem; color: #ccc; }
+    ul { padding-left: 1.4rem; margin-top: 0.4rem; }
+    li { margin-bottom: 0.3rem; }
+    .badge {
+      display: inline-block;
+      background: #2d2d2d;
+      border: 1px solid #3f3f3f;
+      border-radius: 4px;
+      padding: 0.15rem 0.5rem;
+      font-size: 0.82rem;
+      color: #94a3b8;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+    }
+    a { color: #c084fc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #2a2a2a; font-size: 0.85rem; color: #555; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Privacy Policy</h1>
+    <p>MusicByKico &mdash; Last updated: April 12, 2026</p>
+  </header>
+
+  <h2>1. Introduction</h2>
+  <p>
+    This Privacy Policy describes how <strong>MusicByKico</strong> (the &ldquo;Bot&rdquo;), a Discord music bot,
+    handles information when it operates in your Discord server. The Bot is developed and operated by
+    <strong>Kico</strong>.
+  </p>
+  <p>By adding MusicByKico to your server or using its commands, you acknowledge this policy.</p>
+
+  <h2>2. What Data Is Collected</h2>
+  <p>
+    MusicByKico is designed to collect as little data as possible. The following describes what the Bot
+    reads and processes:
+  </p>
+  <ul>
+    <li>
+      <strong>Discord User IDs</strong> &mdash; stored temporarily in memory to track who requested a
+      specific track within the current playback session.
+    </li>
+    <li>
+      <strong>Discord Guild (Server) IDs</strong> &mdash; used in memory to maintain a separate playback
+      state (queue, volume, autoplay setting) per server.
+    </li>
+    <li>
+      <strong>Discord Text and Voice Channel IDs</strong> &mdash; used in memory to send playback
+      notifications to the correct channel and to connect to the correct voice channel.
+    </li>
+    <li>
+      <strong>Search queries and track metadata</strong> &mdash; when you use <code>/play</code> or
+      <code>/playnext</code>, the query text is forwarded to YouTube&nbsp;/&nbsp;YouTube Music via a
+      self-hosted Lavalink server to resolve the audio track. The query and resulting track
+      title&nbsp;/&nbsp;author&nbsp;/&nbsp;URL are held in memory during the session only.
+    </li>
+    <li>
+      <strong>Playback history (in-memory)</strong> &mdash; up to 25 recently played tracks per server
+      are stored in memory to power the autoplay recommendation feature. This data is never written to
+      disk and is cleared when the Bot leaves the voice channel or the container restarts.
+    </li>
+  </ul>
+
+  <h2>3. What Data Is NOT Collected</h2>
+  <ul>
+    <li><strong>Message content</strong> &mdash; the <code>message_content</code> Discord intent is
+        explicitly disabled in the source code. The Bot never reads chat messages.</li>
+    <li>Usernames, display names, avatars, or any profile data.</li>
+    <li>Any data written to a database, file, or persistent storage of any kind.</li>
+    <li>Payment information.</li>
+    <li>Any data from users who have not directly interacted with the Bot.</li>
+  </ul>
+
+  <h2>4. How Data Is Used</h2>
+  <ul>
+    <li>To play music requested by users in the voice channel.</li>
+    <li>To maintain the per-server queue, volume, and autoplay state during an active session.</li>
+    <li>To generate autoplay recommendations based on recently played tracks (in memory only).</li>
+    <li>To send playback status messages to the bound text channel.</li>
+  </ul>
+
+  <h2>5. Legal / Operational Basis</h2>
+  <p>
+    The Bot operates on the basis of <strong>legitimate interest</strong>: all data processing is strictly
+    necessary for the Bot to perform the service you invited it to provide. No data is processed for
+    advertising, profiling, or any purpose beyond active music playback.
+  </p>
+
+  <h2>6. Data Storage and Retention</h2>
+  <p>
+    All data processed by MusicByKico is held <strong>exclusively in application memory (RAM)</strong>
+    for the duration of an active playback session. No data is persisted to any database, file system,
+    or third-party storage service.
+  </p>
+  <p>All in-memory data is automatically discarded when:</p>
+  <ul>
+    <li>The Bot disconnects from the voice channel (<code>/disconnect</code>, <code>/stop</code>, or inactivity timeout).</li>
+    <li>The Bot container restarts.</li>
+  </ul>
+
+  <h2>7. Third-Party Services</h2>
+  <ul>
+    <li>
+      <strong>Discord</strong> &mdash; the Bot operates via the Discord API.
+      <a href="https://discord.com/privacy" target="_blank" rel="noopener">Discord&rsquo;s Privacy Policy</a>
+      applies to all data that passes through their platform.
+    </li>
+    <li>
+      <strong>YouTube / YouTube Music</strong> &mdash; search queries and track URLs are resolved via
+      Lavalink using YouTube&rsquo;s public data.
+      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google&rsquo;s Privacy Policy</a>
+      applies to requests made to YouTube.
+    </li>
+    <li>
+      <strong>Lavalink</strong> &mdash; a self-hosted audio streaming server operated by the Developer.
+      No user data leaves the Developer&rsquo;s infrastructure through Lavalink to any third party
+      beyond YouTube.
+    </li>
+    <li>
+      <strong>Telegram Bot API</strong> <span class="badge">Operator-only</span> &mdash;
+      if configured, the Bot sends internal error alerts (track exceptions, node outages) to a private
+      Telegram chat controlled by the Developer. These alerts contain only technical error details
+      (track title, error code) and are never shared with users.
+    </li>
+  </ul>
+
+  <h2>8. Data Sharing</h2>
+  <p>
+    MusicByKico does <strong>not</strong> sell, rent, trade, or share any user data with any third party,
+    advertiser, or analytics provider. The only external data flow is search queries forwarded to
+    YouTube via Lavalink for the purpose of audio resolution.
+  </p>
+
+  <h2>9. Security</h2>
+  <p>
+    The Bot runs in a containerized Docker environment. No user data is stored persistently, which
+    significantly limits the risk of data exposure. The Lavalink audio server is password-protected and
+    not publicly accessible. All in-memory session data is cleared automatically at session end.
+  </p>
+
+  <h2>10. Children&rsquo;s Privacy</h2>
+  <p>
+    MusicByKico does not knowingly collect any information from children. The Bot operates within
+    Discord, which requires users to be at least 13 years old per
+    <a href="https://discord.com/terms" target="_blank" rel="noopener">Discord&rsquo;s Terms of Service</a>.
+  </p>
+
+  <h2>11. Your Rights</h2>
+  <p>
+    Because MusicByKico stores no persistent personal data, there is nothing to access, export, or
+    delete after a session ends. If you have concerns about data processed during an active session,
+    you may ask a server administrator to remove the Bot from the server, which terminates all
+    processing immediately.
+  </p>
+  <p>
+    If you believe any data about you has been improperly handled, contact us at the address below.
+  </p>
+
+  <h2>12. Changes to This Policy</h2>
+  <p>
+    This policy may be updated if the Bot&rsquo;s functionality changes in ways that affect data handling.
+    The &ldquo;Last updated&rdquo; date at the top reflects the most recent revision.
+  </p>
+
+  <h2>13. Contact</h2>
+  <p>
+    Developer: <strong>Kico</strong><br />
+    Email: <a href="mailto:oleksi1221@gmail.com">oleksi1221@gmail.com</a>
+  </p>
+
+  <footer>
+    &copy; 2026 Kico &mdash; MusicByKico. All rights reserved.
+  </footer>
+</div>
+</body>
+</html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — MusicByKico</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f0f0f;
+      color: #e0e0e0;
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 780px; margin: 0 auto; }
+    header { margin-bottom: 2.5rem; border-bottom: 1px solid #2a2a2a; padding-bottom: 1.5rem; }
+    header h1 { font-size: 2rem; color: #ffffff; }
+    header p { color: #888; margin-top: 0.4rem; font-size: 0.9rem; }
+    h2 { font-size: 1.15rem; color: #c084fc; margin-top: 2rem; margin-bottom: 0.6rem; }
+    p, li { font-size: 0.97rem; color: #ccc; }
+    ul { padding-left: 1.4rem; margin-top: 0.4rem; }
+    li { margin-bottom: 0.3rem; }
+    .badge {
+      display: inline-block;
+      background: #2d2d2d;
+      border: 1px solid #3f3f3f;
+      border-radius: 4px;
+      padding: 0.15rem 0.5rem;
+      font-size: 0.82rem;
+      color: #94a3b8;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+    }
+    .todo {
+      background: #2a1a00;
+      border-left: 3px solid #f59e0b;
+      padding: 0.5rem 0.8rem;
+      border-radius: 4px;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #fbbf24;
+    }
+    a { color: #c084fc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #2a2a2a; font-size: 0.85rem; color: #555; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Privacy Policy</h1>
+    <p>MusicByKico &mdash; Last updated: April 12, 2026</p>
+  </header>
+
+  <h2>1. Introduction</h2>
+  <p>
+    This Privacy Policy describes how <strong>MusicByKico</strong> (the &ldquo;Bot&rdquo;), a Discord music bot,
+    handles information when it operates in your Discord server. The Bot is developed and operated by
+    <strong>Kico</strong> (the &ldquo;Developer&rdquo;).
+  </p>
+  <p>By adding MusicByKico to your server or using its commands, you acknowledge this policy.</p>
+
+  <h2>2. What Data Is Collected</h2>
+  <p>
+    MusicByKico is designed to collect as little data as possible. The following describes what the Bot
+    reads and processes:
+  </p>
+  <ul>
+    <li>
+      <strong>Discord User IDs</strong> &mdash; used temporarily in memory to track who requested a specific
+      track. This is used solely to attribute a song request within the current playback session.
+    </li>
+    <li>
+      <strong>Discord Guild (Server) IDs</strong> &mdash; used in memory to maintain a separate playback
+      state (queue, volume, autoplay setting) per server.
+    </li>
+    <li>
+      <strong>Discord Text and Voice Channel IDs</strong> &mdash; used in memory to send playback
+      notifications to the correct channel and to connect to the correct voice channel.
+    </li>
+    <li>
+      <strong>Search queries and track metadata</strong> &mdash; when you use <code>/play</code> or
+      <code>/playnext</code>, the query text is forwarded to YouTube / YouTube Music via Lavalink to
+      resolve the audio track. The query and resulting track title/author/URL are held in memory during
+      the session only.
+    </li>
+    <li>
+      <strong>Playback history (in-memory)</strong> &mdash; up to 25 recently played tracks per server
+      are stored in memory to power the autoplay recommendation feature. This data is never written to disk
+      and is cleared when the Bot leaves the voice channel or the server restarts.
+    </li>
+  </ul>
+  <p>
+    <strong>The Bot does NOT collect:</strong>
+  </p>
+  <ul>
+    <li>Message content &mdash; the <code>message_content</code> intent is explicitly disabled in the source code.</li>
+    <li>Usernames, display names, avatars, or any profile data.</li>
+    <li>Any data written to a database, file, or persistent storage of any kind.</li>
+    <li>Payment information.</li>
+    <li>Any data from users who have not interacted with the Bot.</li>
+  </ul>
+
+  <h2>3. How Data Is Used</h2>
+  <ul>
+    <li>To play music requested by users in the voice channel.</li>
+    <li>To maintain the per-server queue, volume, and autoplay state during an active session.</li>
+    <li>To generate autoplay recommendations based on recently played tracks (in memory only).</li>
+    <li>To send playback status messages to the bound text channel.</li>
+  </ul>
+
+  <h2>4. Legal / Operational Basis</h2>
+  <p>
+    The Bot operates on the basis of <strong>legitimate interest</strong>: all data processing
+    described above is strictly necessary for the Bot to perform the service you invited it to provide.
+    No data is processed for advertising, profiling, or any purpose beyond active music playback.
+  </p>
+
+  <h2>5. Data Storage and Retention</h2>
+  <p>
+    All data processed by MusicByKico is held <strong>exclusively in application memory (RAM)</strong>
+    for the duration of an active playback session. No data is persisted to any database, file system,
+    or third-party storage service.
+  </p>
+  <p>
+    All in-memory data is automatically discarded when:
+  </p>
+  <ul>
+    <li>The Bot disconnects from the voice channel (via <code>/disconnect</code>, <code>/stop</code>, or inactivity).</li>
+    <li>The Bot process restarts (e.g. after a Docker container restart).</li>
+  </ul>
+
+  <h2>6. Third-Party Services</h2>
+  <ul>
+    <li>
+      <strong>Discord</strong> &mdash; the Bot operates via the Discord API. Discord&rsquo;s own
+      <a href="https://discord.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> applies to all data
+      that passes through their platform.
+    </li>
+    <li>
+      <strong>YouTube / YouTube Music</strong> &mdash; search queries and track URLs are resolved via
+      Lavalink using YouTube&rsquo;s public data. Google&rsquo;s
+      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> applies to
+      requests made to YouTube.
+    </li>
+    <li>
+      <strong>Lavalink</strong> &mdash; a self-hosted audio streaming server operated by the Developer.
+      No data leaves the Developer&rsquo;s infrastructure through Lavalink to any third party beyond YouTube.
+    </li>
+    <li>
+      <strong>Telegram Bot API</strong> <span class="badge">Optional / Operator-only</span> &mdash;
+      if configured, the Bot sends internal error alerts (track exceptions, node outages) to a private
+      Telegram chat controlled by the Developer. These alerts contain only technical error details
+      (track title, error code) and are never shared with users.
+    </li>
+  </ul>
+
+  <h2>7. Data Sharing</h2>
+  <p>
+    MusicByKico does <strong>not</strong> sell, rent, trade, or share any user data with any third party,
+    advertiser, or analytics provider. The only external data flow is search queries forwarded to
+    YouTube via Lavalink for the purpose of audio resolution.
+  </p>
+
+  <h2>8. Security</h2>
+  <p>
+    The Bot runs in a containerized Docker environment. No user data is stored persistently, which
+    significantly limits the risk of data exposure. The Lavalink audio server is password-protected and
+    not publicly accessible. All in-memory data is cleared automatically at session end.
+  </p>
+
+  <h2>9. Children&rsquo;s Privacy</h2>
+  <p>
+    MusicByKico does not knowingly collect any information from children. The Bot operates within
+    Discord, which requires users to be at least 13 years old per
+    <a href="https://discord.com/terms" target="_blank" rel="noopener">Discord&rsquo;s Terms of Service</a>.
+  </p>
+
+  <h2>10. Your Rights</h2>
+  <p>
+    Because MusicByKico stores no persistent personal data, there is nothing to access, export, or delete
+    after a session ends. If you have concerns about data processed during an active session, you may
+    ask a server administrator to remove the Bot from the server, which will terminate all processing
+    immediately.
+  </p>
+  <p>
+    If you believe any data about you has been improperly handled, you may contact the Developer
+    using the information below.
+  </p>
+
+  <h2>11. Changes to This Policy</h2>
+  <p>
+    This policy may be updated if the Bot&rsquo;s functionality changes in ways that affect data handling.
+    The &ldquo;Last updated&rdquo; date at the top of this page reflects the most recent revision.
+  </p>
+
+  <h2>12. Contact</h2>
+  <p>
+    Developer: <strong>Kico</strong><br />
+    Email: <a href="mailto:oleksi1221@gmail.com">oleksi1221@gmail.com</a><br />
+    GitHub: <a href="https://github.com/Oleksii1221/MusicByKico" target="_blank" rel="noopener">github.com/Oleksii1221/MusicByKico</a>
+  </p>
+
+  <footer>
+    &copy; 2026 Kico &mdash; MusicByKico. All rights reserved.
+  </footer>
+</div>
+</body>
+</html>
