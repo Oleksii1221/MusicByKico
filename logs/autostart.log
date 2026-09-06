@@ -1,0 +1,258 @@
+[23.03.2026  4:25:42,66] ==================================================
+[23.03.2026  4:25:42,67] MusicBot autostart script started
+[23.03.2026  4:25:42,69] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[23.03.2026  4:26:02,49] Using compose command: docker compose
+[23.03.2026  4:26:03,43] Docker engine is ready
+[23.03.2026  4:26:03,54] Starting containers...
+ Network deploy_default Creating 
+ Network deploy_default Created 
+ Container musicbot-lavalink Creating 
+ Container musicbot-lavalink Created 
+ Container musicbot-bot Creating 
+ Container musicbot-bot Created 
+ Container musicbot-lavalink Starting 
+ Container musicbot-lavalink Started 
+ Container musicbot-bot Starting 
+ Container musicbot-bot Started 
+[23.03.2026  4:26:15,41] ERROR: musicbot-bot is not running after startup
+[23.03.2026  4:28:04,37] ==================================================
+[23.03.2026  4:28:04,38] MusicBot autostart script started
+[23.03.2026  4:28:04,39] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[23.03.2026  4:28:24,50] Using compose command: docker compose
+[23.03.2026  4:28:25,34] Docker engine is ready
+[23.03.2026  4:28:25,47] Starting containers...
+ Network deploy_default Creating 
+ Network deploy_default Created 
+ Container musicbot-lavalink Creating 
+ Container musicbot-lavalink Created 
+ Container musicbot-bot Creating 
+ Container musicbot-bot Created 
+ Container musicbot-lavalink Starting 
+ Container musicbot-lavalink Started 
+ Container musicbot-bot Starting 
+ Container musicbot-bot Started 
+[23.03.2026  4:28:36,34] SUCCESS: musicbot-bot and musicbot-lavalink are running
+[25.03.2026 23:39:22,21] ==================================================
+[25.03.2026 23:39:22,24] MusicBot autostart script started
+[25.03.2026 23:39:22,26] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[25.03.2026 23:39:42,48] Using compose command: docker compose
+[25.03.2026 23:39:43,46] Docker engine is ready
+[25.03.2026 23:39:43,58] Starting containers...
+ Network deploy_default Creating 
+ Network deploy_default Created 
+ Container musicbot-lavalink Creating 
+ Container musicbot-lavalink Created 
+ Container musicbot-bot Creating 
+ Container musicbot-bot Created 
+ Container musicbot-lavalink Starting 
+ Container musicbot-lavalink Started 
+ Container musicbot-bot Starting 
+ Container musicbot-bot Started 
+[25.03.2026 23:39:55,49] SUCCESS: musicbot-bot and musicbot-lavalink are running
+[25.03.2026 23:44:33,65] ==================================================
+[25.03.2026 23:44:33,66] MusicBot autostart script started
+[25.03.2026 23:44:33,67] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[25.03.2026 23:44:53,57] Using compose command: docker compose
+[25.03.2026 23:45:12,09] Docker engine is ready
+[25.03.2026 23:45:12,21] Starting containers...
+ Network deploy_default Creating 
+ Network deploy_default Created 
+ Container musicbot-lavalink Creating 
+ Container musicbot-lavalink Created 
+ Container musicbot-bot Creating 
+ Container musicbot-bot Created 
+ Container musicbot-lavalink Starting 
+ Container musicbot-lavalink Started 
+ Container musicbot-bot Starting 
+ Container musicbot-bot Started 
+[25.03.2026 23:45:23,46] SUCCESS: musicbot-bot and musicbot-lavalink are running
+[25.03.2026 23:45:27,11] ==================================================
+[25.03.2026 23:45:27,12] MusicBot autostart script started
+[25.03.2026 23:45:27,14] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[25.03.2026 23:45:37,41] ==================================================
+[25.03.2026 23:45:37,42] MusicBot autostart script started
+[25.03.2026 23:45:37,44] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[25.03.2026 23:45:57,48] Using compose command: docker compose
+[25.03.2026 23:45:58,35] Docker engine is ready
+[25.03.2026 23:45:58,47] Starting containers...
+ Network deploy_default Creating 
+ Network deploy_default Created 
+ Container musicbot-lavalink Creating 
+ Container musicbot-lavalink Created 
+ Container musicbot-bot Creating 
+ Container musicbot-bot Created 
+ Container musicbot-lavalink Starting 
+ Container musicbot-lavalink Started 
+ Container musicbot-bot Starting 
+ Container musicbot-bot Started 
+[25.03.2026 23:46:10,43] SUCCESS: musicbot-bot and musicbot-lavalink are running
+[29.03.2026 23:41:13,72] ==================================================
+[29.03.2026 23:41:13,77] MusicBot autostart script started
+[29.03.2026 23:41:13,77] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[29.03.2026 23:41:34,54] Using compose command: docker compose
+[29.03.2026 23:41:37,27] Docker engine is ready
+[29.03.2026 23:41:37,37] Starting containers...
+ Network deploy_default Creating 
+ Network deploy_default Created 
+ Container musicbot-lavalink Creating 
+ Container musicbot-lavalink Created 
+ Container musicbot-bot Creating 
+ Container musicbot-bot Created 
+ Container musicbot-lavalink Starting 
+ Container musicbot-lavalink Started 
+ Container musicbot-bot Starting 
+ Container musicbot-bot Started 
+[29.03.2026 23:41:49,43] SUCCESS: musicbot-bot and musicbot-lavalink are running
+[01.04.2026 17:25:02,22] ==================================================
+[01.04.2026 17:25:02,24] MusicBot autostart script started
+[01.04.2026 17:25:02,25] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[01.04.2026 17:25:22,78] Using compose command: docker compose
+[01.04.2026 17:25:27,59] Docker engine is ready
+[01.04.2026 17:25:27,78] musicbot-bot is already running, nothing to do
+[09.04.2026 10:03:51,46] ==================================================
+[09.04.2026 10:03:51,53] MusicBot autostart script started
+[09.04.2026 10:03:51,60] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[09.04.2026 10:04:16,22] Using compose command: docker compose
+[09.04.2026 10:04:22,94] Docker engine is ready
+[09.04.2026 10:04:23,16] musicbot-bot is already running, nothing to do
+[09.04.2026 16:13:17,68] ==================================================
+[09.04.2026 16:13:17,70] MusicBot autostart script started
+[09.04.2026 16:13:17,71] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[09.04.2026 16:13:38,03] Using compose command: docker compose
+[09.04.2026 16:13:40,95] Docker engine is ready
+[09.04.2026 16:13:41,07] Starting containers...
+ Container musicbot-lavalink Running 
+ Container musicbot-bot Running 
+[09.04.2026 16:13:51,36] ERROR: musicbot-lavalink is not running after startup
+[10.04.2026 22:40:39,47] ==================================================
+[10.04.2026 22:40:39,57] MusicBot autostart script started
+[10.04.2026 22:40:39,58] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[10.04.2026 22:41:04,67] Using compose command: docker compose
+[10.04.2026 22:41:05,76] Docker engine is ready
+[10.04.2026 22:41:05,93] musicbot-bot is already running, nothing to do
+[12.04.2026  3:36:54,67] ==================================================
+[12.04.2026  3:36:54,69] MusicBot autostart script started
+[12.04.2026  3:36:54,70] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[12.04.2026  3:37:14,49] Using compose command: docker compose
+[12.04.2026  3:37:15,37] Docker engine is ready
+[12.04.2026  3:37:15,48] Starting containers...
+ Container musicbot-lavalink Running 
+ Container musicbot-bot Recreate 
+ Container musicbot-bot Recreated 
+ Container musicbot-bot Starting 
+ Container musicbot-bot Started 
+[12.04.2026  3:37:26,43] SUCCESS: musicbot-bot and musicbot-lavalink are running
+[21.04.2026  1:02:20,99] ==================================================
+[21.04.2026  1:02:21,06] MusicBot autostart script started
+[21.04.2026  1:02:21,07] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[21.04.2026  1:02:41,90] Using compose command: docker compose
+[21.04.2026  1:02:43,87] Docker engine is ready
+[21.04.2026  1:02:44,05] musicbot-bot is already running, nothing to do
+[23.04.2026 15:55:44,45] ==================================================
+[23.04.2026 15:55:44,48] MusicBot autostart script started
+[23.04.2026 15:55:44,48] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[23.04.2026 15:56:11,44] Using compose command: docker compose
+[23.04.2026 15:56:19,14] Docker engine is ready
+[23.04.2026 15:56:19,32] musicbot-bot is already running, nothing to do
+[30.04.2026 21:20:56,73] ==================================================
+[30.04.2026 21:20:56,75] MusicBot autostart script started
+[30.04.2026 21:20:56,75] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[30.04.2026 21:21:17,58] Using compose command: docker compose
+[30.04.2026 21:21:22,82] Docker engine is ready
+[30.04.2026 21:21:23,01] musicbot-bot is already running, nothing to do
+[03.05.2026 13:09:29,22] ==================================================
+[03.05.2026 13:09:29,25] MusicBot autostart script started
+[03.05.2026 13:09:29,26] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[03.05.2026 13:09:49,72] Using compose command: docker compose
+[03.05.2026 13:09:50,54] Docker engine is ready
+[03.05.2026 13:09:50,67] musicbot-bot is already running, nothing to do
+[21.05.2026 16:03:39,09] ==================================================
+[21.05.2026 16:03:39,13] MusicBot autostart script started
+[21.05.2026 16:03:39,14] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[21.05.2026 16:04:00,82] Using compose command: docker compose
+[21.05.2026 16:04:04,66] Docker engine is ready
+[21.05.2026 16:04:04,82] musicbot-bot is already running, nothing to do
+[21.05.2026 16:27:37,32] ==================================================
+[21.05.2026 16:27:37,34] MusicBot autostart script started
+[21.05.2026 16:27:37,35] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[21.05.2026 16:27:57,49] Using compose command: docker compose
+[21.05.2026 16:28:04,27] ==================================================
+[21.05.2026 16:28:04,28] MusicBot autostart script started
+[21.05.2026 16:28:04,30] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[21.05.2026 16:28:15,46] ==================================================
+[21.05.2026 16:28:15,47] MusicBot autostart script started
+[21.05.2026 16:28:15,48] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[21.05.2026 16:28:35,52] Using compose command: docker compose
+[21.05.2026 16:28:36,39] Docker engine is ready
+[21.05.2026 16:28:36,52] Starting containers...
+ Network deploy_default Creating 
+ Network deploy_default Created 
+ Container musicbot-lavalink Creating 
+ Container musicbot-lavalink Created 
+ Container musicbot-bot Creating 
+ Container musicbot-bot Created 
+ Container musicbot-lavalink Starting 
+ Container musicbot-lavalink Started 
+ Container musicbot-bot Starting 
+ Container musicbot-bot Started 
+[21.05.2026 16:28:48,44] SUCCESS: musicbot-bot and musicbot-lavalink are running
+[05.06.2026  4:02:13,97] ==================================================
+[05.06.2026  4:02:14,01] MusicBot autostart script started
+[05.06.2026  4:02:14,01] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[05.06.2026  4:02:35,65] Using compose command: docker compose
+[05.06.2026  4:02:36,78] Docker engine is ready
+[05.06.2026  4:02:36,94] musicbot-bot is already running, nothing to do
+[07.06.2026 22:39:44,31] ==================================================
+[07.06.2026 22:39:44,34] MusicBot autostart script started
+[07.06.2026 22:39:44,35] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[07.06.2026 22:40:04,85] Using compose command: docker compose
+[07.06.2026 22:40:06,97] Docker engine is ready
+[07.06.2026 22:40:07,21] musicbot-bot is already running, nothing to do
+[28.06.2026 20:10:37,09] ==================================================
+[28.06.2026 20:10:37,12] MusicBot autostart script started
+[28.06.2026 20:10:37,13] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[28.06.2026 20:10:58,12] Using compose command: docker compose
+[28.06.2026 20:11:20,67] Docker engine is ready
+[28.06.2026 20:11:20,93] musicbot-bot is already running, nothing to do
+[01.07.2026 18:58:03,14] ==================================================
+[01.07.2026 18:58:03,17] MusicBot autostart script started
+[01.07.2026 18:58:03,20] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[01.07.2026 18:58:23,57] Using compose command: docker compose
+[01.07.2026 18:58:28,67] Docker engine is ready
+[01.07.2026 18:58:28,99] musicbot-bot is already running, nothing to do
+[10.07.2026 11:31:06,58] ==================================================
+[10.07.2026 11:31:06,61] MusicBot autostart script started
+[10.07.2026 11:31:06,62] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[10.07.2026 11:31:26,47] Using compose command: docker compose
+[10.07.2026 11:31:27,44] Docker engine is ready
+[10.07.2026 11:31:27,58] musicbot-bot is already running, nothing to do
+[11.07.2026 14:33:16,52] ==================================================
+[11.07.2026 14:33:16,97] MusicBot autostart script started
+[11.07.2026 14:33:16,99] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[11.07.2026 14:33:37,82] Using compose command: docker compose
+[11.07.2026 14:33:39,17] Docker engine is ready
+[11.07.2026 14:33:39,49] musicbot-bot is already running, nothing to do
+[24.07.2026  8:23:35,01] ==================================================
+[24.07.2026  8:23:35,09] MusicBot autostart script started
+[24.07.2026  8:23:35,10] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[24.07.2026  8:23:56,60] Using compose command: docker compose
+[24.07.2026  8:23:59,42] Docker engine is ready
+[24.07.2026  8:23:59,70] musicbot-bot is already running, nothing to do
+[30.07.2026 22:25:21,45] ==================================================
+[30.07.2026 22:25:21,50] MusicBot autostart script started
+[30.07.2026 22:25:21,55] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[30.07.2026 22:25:42,32] Using compose command: docker compose
+[30.07.2026 22:25:49,32] Docker engine is ready
+[30.07.2026 22:25:49,81] musicbot-bot is already running, nothing to do
+[06.08.2026 21:34:20,40] ==================================================
+[06.08.2026 21:34:20,61] MusicBot autostart script started
+[06.08.2026 21:34:20,64] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[06.08.2026 21:34:40,65] Using compose command: docker compose
+[06.08.2026 21:34:51,54] Docker engine is ready
+[06.08.2026 21:34:51,87] musicbot-bot is already running, nothing to do
+[22.08.2026 10:41:00,51] ==================================================
+[22.08.2026 10:41:01,67] MusicBot autostart script started
+[22.08.2026 10:41:01,70] Project dir: C:\Users\KicoServ\Desktop\MusicByKico\
+[22.08.2026 10:41:21,65] Using compose command: docker compose
+[22.08.2026 10:41:27,72] Docker engine is ready
+[22.08.2026 10:41:27,99] musicbot-bot is already running, nothing to do
